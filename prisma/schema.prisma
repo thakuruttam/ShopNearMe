@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model videos {
+  id         Int     @id @default(autoincrement()) @db.UnsignedInt
+  name       String? @db.VarChar(45)
+  caption    String? @db.VarChar(45)
+  link       String? @db.VarChar(45)
+  thumbnail  String? @db.VarChar(45)
+  created_ts String? @db.VarChar(45)
+}
+
+model users {
+  id          Int     @id @default(autoincrement())
+  name        String? @db.VarChar(45)
+  email       String? @db.VarChar(45)
+  passwords   String? @db.LongText
+  userscol    String? @db.VarChar(45)
+  shopName    String? @db.VarChar(45)
+  address     String? @db.VarChar(45)
+  isVendor    Int?    @default(0) @db.TinyInt
+  phoneNumber String? @db.VarChar(45)
+  city        String? @db.VarChar(45)
+  item        item[]
+}
+
+model item {
+  id      Int     @id @default(autoincrement())
+  name    String? @db.VarChar(45)
+  user_id Int
+  price   String? @db.VarChar(45)
+  users   users   @relation(fields: [user_id], references: [id], map: "Item_user_id_fkey")
+
+  @@index([user_id], map: "Item_user_id_fkey")
+}
