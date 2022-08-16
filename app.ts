@@ -52,7 +52,7 @@ const PORT = 8000;
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use("/home",authMiddleware.verifyToken)
+app.use("/item",authMiddleware.verifyToken)
 app.get("/home", async (req:Request,res:Response)=>{
 
 let result= await prisma.users.findMany({})
@@ -300,10 +300,10 @@ app.post("/items", async (req:Request,res:Response)=>{
                 })
      
 
-                if(process.env.NODE_ENV= "production"){
-                    app.use(express.static("client/build"));
-                }
+                // if(process.env.NODE_ENV= "production"){
+                //     app.use(express.static("client/build"));
+                // }
 
-               server.listen(process.env.PORT || 5000, () => {
+               server.listen(process.env.PORT || 8000, () => {
                 console.log("SERVER RUNNING");
               });

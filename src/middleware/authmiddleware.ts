@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 
 verifyToken=async (req:Request,res:Response, next:NextFunction)=>{
     try {
+        console.log("middleware Triggered")
         const token = req.header("Authorization");
   
         const verified = jwt.verify(token, process.env.Secret);
